@@ -7,6 +7,7 @@
  */
 
 // The names and URLs to all of the feeds we'd like available.
+
 var allFeeds = [
     {
         name: 'Udacity Blog',
@@ -41,6 +42,7 @@ function init() {
  * which will be called after everything has run successfully.
  */
  function loadFeed(id, cb) {
+
      var feedUrl = allFeeds[id].url,
          feedName = allFeeds[id].name;
 
@@ -50,6 +52,7 @@ function init() {
        data: JSON.stringify({url: feedUrl}),
        contentType:"application/json",
        success: function (result, status){
+                 //debugger;
 
                  var container = $('.feed'),
                      title = $('.header-title'),
@@ -70,12 +73,14 @@ function init() {
                  });
 
                  if (cb) {
+
                      cb();
                  }
                },
        error: function (result, status, err){
                  //run only the callback without attempting to parse result due to error
                  if (cb) {
+
                      cb();
                  }
                },
@@ -93,6 +98,7 @@ google.setOnLoadCallback(init);
  * until the DOM is ready.
  */
 $(function() {
+
     var container = $('.feed'),
         feedList = $('.feed-list'),
         feedItemTemplate = Handlebars.compile($('.tpl-feed-list-item').html()),
@@ -106,6 +112,7 @@ $(function() {
      * available feeds within the menu.
      */
     allFeeds.forEach(function(feed) {
+
         feed.id = feedId;
         feedList.append(feedItemTemplate(feed));
 
@@ -117,6 +124,7 @@ $(function() {
      * (following the link) from occurring.
      */
     feedList.on('click', 'a', function() {
+
         var item = $(this);
 
         $('body').addClass('menu-hidden');
@@ -128,6 +136,7 @@ $(function() {
      * on the body to perform the hiding/showing of our menu.
      */
     menuIcon.on('click', function() {
+
         $('body').toggleClass('menu-hidden');
     });
 }());
