@@ -32,7 +32,6 @@ $(function() {
          * and that the URL is not empty.
          */
          it('URL Feed Defined', function(){
-           //console.log(allFeeds);
            for (f=0; f<allFeeds.length; f++){
              expect(allFeeds[f].url).toBeDefined();
              expect(allFeeds[f].url).not.toBe(null);
@@ -44,10 +43,8 @@ $(function() {
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
-
          it('URL Name Defined', function(){
            for (f=0; f<allFeeds.length; f++){
-             //console.log(allFeeds[f].url);
              expect(allFeeds[f].name).toBeDefined();
              expect(allFeeds[f].name).not.toBe(null);
            }
@@ -63,7 +60,6 @@ $(function() {
          * the CSS to determine how we're performing the
          * hiding/showing of the menu element.
          */
-
          it('Element Hidden', function(){
            expect($('Body').attr('class')).toBe("menu-hidden");
          });
@@ -74,6 +70,7 @@ $(function() {
           * clicked and does it hide when clicked again.
           */
 
+          // Making sure the menu displays when it is hidden.
           it('Menu Visibility Show', function(){
             //document.getElementsByTagName("Body")[0].className="menu-hidden";
             $('Body').attr('class',"menu-hidden");
@@ -81,13 +78,13 @@ $(function() {
             expect($('Body').attr('class')).toBe("");
           });
 
+          // Making sure the menu hides when it is already visible.
           it('Menu Visibility Hide', function(){
             //document.getElementsByTagName("Body")[0].className="";
             $('Body').attr('class','');
             $('.menu-icon-link').click();
             expect($('Body').attr('class')).toBe("menu-hidden");
           });
-
     });
 
     /* TODO: Write a new test suite named "Initial Entries" */
@@ -140,4 +137,5 @@ $(function() {
            loadFeed(0, done);
        });
   });
+  
 }());
