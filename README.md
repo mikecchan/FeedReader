@@ -1,5 +1,5 @@
 # Udacity Test Driven Development Project
-- Michael Chan, 4/15/18
+Michael Chan, 4/15/18
 
 ## Project Overview
 
@@ -24,4 +24,16 @@ I learned how to use Jasmine to write a number of tests against a pre-existing a
 * Good tests give me the ability to quickly analyze whether new code breaks an existing feature within my codebase, without having to manually test all of the functionality.
 
 
-# How will I complete this project?
+## How to Run this application.
+
+You can run this application in one of two ways...
+
+1. Visit https://mikecchan.github.io/FeedReader/
+
+2. Download or clone this project and view the index.html on a browser of your choice.
+
+## Where to focus in my Project.
+
+Pay attention near the bottom of the page where it says Jasmine and indicates the specs have passed.
+
+The code I have inputted for testing is found on feedreader.js(https://github.com/mikecchan/FeedReader/blob/master/jasmine/spec/feedreader.js).
