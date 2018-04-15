@@ -24,7 +24,6 @@ $(function() {
         it('are defined', function() {
             expect(allFeeds).toBeDefined();
             expect(allFeeds.length).not.toBe(0);
-            console.log('test 1 passed');
         });
 
 
@@ -38,7 +37,6 @@ $(function() {
              expect(allFeeds[f].url).toBeDefined();
              expect(allFeeds[f].url).not.toBe(null);
            }
-           console.log('test 2 passed');
          });
 
 
@@ -53,7 +51,6 @@ $(function() {
              expect(allFeeds[f].name).toBeDefined();
              expect(allFeeds[f].name).not.toBe(null);
            }
-           console.log('test 3 passed');
          });
     });
 
@@ -68,8 +65,7 @@ $(function() {
          */
 
          it('Element Hidden', function(){
-           expect(document.getElementsByTagName("Body")[0].className).toBe("menu-hidden");
-           console.log('test 4 passed');
+           expect($('Body').attr('class')).toBe("menu-hidden");
          });
 
          /* TODO: Write a test that ensures the menu changes
@@ -77,26 +73,21 @@ $(function() {
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
-          it('Menu Visibility', function(){
 
-            beforeEach(function(){
-              document.getElementsByTagName("Body")[0].className="menu-hidden";
-
-              $('.menu-icon-link').click();
-
-              expect(document.getElementsByTagName("Body")[0].className).toBe(NULL);
-            })
-
-            beforeEach(function(){
-              document.getElementsByTagName("Body")[0].className=NULL;
-
-              $('.menu-icon-link').click();
-
-              expect(document.getElementsByTagName("Body")[0].className).toBe("menu-hidden");
-            })
-
-            console.log('test 5 passed');
+          it('Menu Visibility Show', function(){
+            //document.getElementsByTagName("Body")[0].className="menu-hidden";
+            $('Body').attr('class',"menu-hidden");
+            $('.menu-icon-link').click();
+            expect($('Body').attr('class')).toBe("");
           });
+
+          it('Menu Visibility Hide', function(){
+            //document.getElementsByTagName("Body")[0].className="";
+            $('Body').attr('class','');
+            $('.menu-icon-link').click();
+            expect($('Body').attr('class')).toBe("menu-hidden");
+          });
+
     });
 
     /* TODO: Write a new test suite named "Initial Entries" */
@@ -108,29 +99,45 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
+         let feed_count;
 
-         beforeEach(function(){
-           loadFeed();
-           done();
-         }, 1);
+         beforeEach(function(done){
+           loadFeed(0, function() {
+             feed_count = $('.feed').children().length;
+             done();
+           });
+         });
 
          it('LoadFeed Complete Work', function(done){
-           console.log(document.getElementsByClassName('feed'));
-           let feed_count = document.getElementsByClassName('feed').children.length;
-           console.log(feed_count);
-           expect(feed_count).toBeGreaterThanOrEqual(1);
-           console.log('test 6 passed');
+           expect(feed_count).toBeGreaterThan(0);
+           done();
+         });
+
+         afterAll(function(done) {
+             loadFeed(0, done);
          });
     });
 
     /* TODO: Write a new test suite named "New Feed Selection" */
-    describe('New Feed Selection', function() {
+    describe('New Feed Selection', function(done) {
+       /* test ensures when a new feed is loaded
+        * by the loadFeed function that the content actually changes.
+       */
+       it('has some other content', function(done) {
+           // load feeds
+           loadFeed(0, function() {
+               let title = $(".feed .entry h2").html();
+               let header = $("h1.header-title").html();
+               loadFeed(1, function() {
+                 expect($(".feed .entry h2").html()).not.toBe(title);
+                 expect($("h1.header-title").html()).not.toBe(header);
+                done();
+               });
+           });
+       });
 
-        /* TODO: Write a test that ensures when a new feed is loaded
-         * by the loadFeed function that the content actually changes.
-         * Remember, loadFeed() is asynchronous.
-         */
-
-    });
-
+       afterAll(function(done) {
+           loadFeed(0, done);
+       });
+  });
 }());
