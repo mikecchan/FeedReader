@@ -28,7 +28,7 @@ I learned how to use Jasmine to write a number of tests against a pre-existing a
 
 You can run this application in one of two ways...
 
-1. Visit https://mikecchan.github.io/FeedReader/
+1. Visit https://mikecchan.github.io/Udacity_TDD/
 
 2. Download or clone this project and view the index.html on a browser of your choice.
 
